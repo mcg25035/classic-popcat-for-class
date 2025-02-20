@@ -4,12 +4,29 @@
 
 <head>
     <title>POPCAT CLASSIC</title>
+    <script>
+        
+        function main() {
+            let clicks = 0;
+            let updateClicks = () => {
+                let targetElement = document.getElementById("counter");
+                targetElement.innerHTML = clicks;
+            }
+
+            document.onclick = () => {
+                clicks++;
+                updateClicks();
+            }
+        }
+
+        window.onload = main;
+    </script>
 </head>
 
 <body>
     <img class="title" src="imgs/popcat.svg" alt="POPCAT">
-
     <div class="cat-img" id="p"></div>
+    <p id="counter">0</p>
 </body>
 
 </html>

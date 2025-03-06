@@ -9,6 +9,13 @@
         function main() {
             let clicks = 0;
             let targetElement = document.querySelector(".cat-img");
+            const popSounds = [];
+            for (let i = 1; i <= 4; i++) {
+                const audio = new Audio(`pops/pop${i}.mp3`);
+                popSounds.push(audio);
+            }
+            let currentSoundIndex = 0;
+
             let updateClicks = () => {
                 targetElement.innerHTML = clicks;
             }
@@ -21,10 +28,21 @@
                 targetElement.id = "p";
             }
 
+            const playSound = () => {
+                if (!popSounds || popSounds.length === 0) return;
+
+                const sound = popSounds[currentSoundIndex];
+                if (!sound) return;
+
+                sound.play();
+                currentSoundIndex = (currentSoundIndex + 1) % popSounds.length;
+            };
+
             document.onmousedown = () => {
                 clicks++;
                 updateClicks();
                 mouseOpen();
+                playSound();
             }
 
             document.onmouseup = () => {
